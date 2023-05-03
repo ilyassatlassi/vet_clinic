@@ -94,7 +94,7 @@ Clone this repository to your desired folder:
 git clone https://github.com/ilyassatlassi/vet_clinic.git
   ```
   ```sh 
-  cd vet_clinic_database
+  cd vet_clinic
   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
