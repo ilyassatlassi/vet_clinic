@@ -31,3 +31,37 @@ WHERE species IS NULL;
 select * from animals;
 COMMIT;
 select * from animals;
+
+BEGIN;
+DELETE FROM animals
+WHERE date_of_birth > '2022-1-1';
+SAVEPOINT p_point;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1;
+
+select * from animals;
+
+ROLLBACK TO p_point;
+
+select * from animals;
+
+UPDATE animals
+SET weight_kg = weight_kg * -1
+WHERE weight_kg < 0;
+
+select * from animals;
+
+COMMIT;
+
+select * from animals;
+
+select COUNT(*) FROM animals;
+select COUNT(*) FROM animals WHERE escape_attempts = 0;
+select AVG(weight_kg) FROM animals;
+
+select neutered, SUM(escape_attempts) FROM animals GROUP BY neutered;
+
+select species, MAX(weight_kg), MIN(weight_kg) FROM animals GROUP BY species;
+
+select species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-1-1' AND '2000-12-31' GROUP BY species;
