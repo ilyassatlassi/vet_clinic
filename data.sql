@@ -13,3 +13,42 @@ INSERT INTO animals (name, date_of_birth, escape_attempts, neutered, weight_kg) 
   (10, 'Blossom', '1998-10-13', 3, 'true', 17),
   (11, 'Ditto', '2022-05-14', 4, 'true', 22)
   ;
+--------------------------------------------------------------------------------
+
+INSERT INTO owners (full_name, age) VALUES ('Sam Smith', 34), ('Jennifer Orwell', 19), ('Bob', 45), ('Melody', 77), ('Dean Winchester', 14), ('Jodie Whittaker', 38);
+
+INSERT INTO species (name) VALUES ('Pokemon'), ('Digimon');
+BEGIN;
+UPDATE animals
+SET species_id = species.id
+FROM species
+WHERE species.name = 'Digimon' AND animals.name LIKE '%mon';
+UPDATE animals
+SET species_id = species.id
+FROM species
+WHERE species.name = 'Pokemon' AND animals.species_id IS NULL;
+COMMIT;
+
+
+BEGIN;
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name = 'Agumon' AND owners.full_name = 'Sam Smith';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Gabumon', 'Pikachu') AND owners.full_name = 'Jennifer Orwell';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Charmander', 'Squirtle', 'Blossom') AND owners.full_name = 'Melody Pond';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Angemon', 'Boarmon') AND owners.full_name = 'Dean Winchester';
+UPDATE animals
+SET owner_id = owners.id
+FROM owners
+WHERE animals.name IN ('Devimon', 'Plantmon') AND owners.full_name = 'Bob';
+COMMIT;
